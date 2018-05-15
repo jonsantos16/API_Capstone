@@ -11,10 +11,10 @@ let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
-    maxResults: 50,
+    maxResults: 2,
 };
 
-let forecast = {
+let weatherQuery = {
     key: 'e3b4b76d027b48dfad9acd269e86e54b',
     lat: '',
     lon: ''
@@ -32,37 +32,34 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
-        console.log(data);
-        data.results.forEach(item => {
-            hikeQuery.lat = item.geometry.location.lat;
-            hikeQuery.lon = item.geometry.location.lng;
-            getHikeData(data);
-        })
+        // console.log(data);
+        hikeQuery.lat = data.results[0].geometry.location.lat;
+        hikeQuery.lon = data.results[0].geometry.location.lng;
+        getHikeData();
     });
 }
 
 const getHikeData = () => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
-        console.log(data);
+        // console.log(data);
         displayHikeData(data);
+        data.trails.forEach(trail => {
+            weatherQuery.lat = trail.latitude;
+            weatherQuery.lon = trail.longitude;
+            getWeatherData();
+        })
     });
 }
 
-const getWeatherData = () => {
-
-}
-
 const displayHikeData = data => {
-    console.log(data.trails);
-    const results = formatData(data.trails);
-    console.log(results);
+    // console.log('data dot trails is ', data.trails);
+    const results = getItemsHtml(data.trails);
     $('.results').html(results);
 }
 
-const formatData = trails => {
-    trails.forEach((trail) => {
-        console.log(trail);
-        return `<div>
+const getItemsHtml = trails => (
+    trails.map((trail) => (
+        `<div>
             <a href="${trail.url} target="blank">
                 <img src="${trail.imgSmallMed}" alt="picture of ${trail.name}">
             </a>
@@ -72,7 +69,28 @@ const formatData = trails => {
             <h3>${trail.location}</h3>
             <h4>Length: ${trail.length} miles</h4>
         </div>`
+    ))
+)
+
+const getWeatherData = () => {
+    $.getJSON(Weather_URL, weatherQuery, (data) => {
+        // console.log(data);
+        displayWeatherData(data);
     });
+}
+
+const displayWeatherData = data => {
+    console.log ('weather data is ', data);
+    // console.log ('weather data.data is ', data.data);
+    const sixteenDay = getWeatherHtml(data);
+    // getWeatherHtml(data);
+    $('.results').append(sixteenDay);
+}
+
+const getWeatherHtml = forecast => {
+        forecast.data.map(day => {
+            return `<div>${day.max_temp}</div>`
+        })  
 }
 
 const initApp = () => {
