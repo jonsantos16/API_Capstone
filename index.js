@@ -82,15 +82,22 @@ const getWeatherData = () => {
 const displayWeatherData = data => {
     console.log ('weather data is ', data);
     // console.log ('weather data.data is ', data.data);
-    const sixteenDay = getWeatherHtml(data);
+    let sixteenDay = getWeatherHtml(data);
+    console.log(sixteenDay);
     // getWeatherHtml(data);
     $('.results').append(sixteenDay);
 }
 
-const getWeatherHtml = forecast => {
-        forecast.data.map(day => {
-            return `<div>${day.max_temp}</div>`
-        })  
+const getWeatherHtml = (data) => {
+    let array = [];
+    data.data.map(day => {
+        array.push(    
+            `<div>
+            <h3>${day.max_temp}</h3>
+            </div>`
+        );    
+    }) 
+    return array;     
 }
 
 const initApp = () => {
