@@ -32,7 +32,6 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
-        // console.log(data);
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData();
