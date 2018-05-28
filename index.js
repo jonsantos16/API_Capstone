@@ -20,6 +20,9 @@ let weatherQuery = {
     lon: ''
 };
 
+let info = [];
+
+
 const search = () => {
     $('.js-search-form').on('submit', event => {
         event.preventDefault();
@@ -34,20 +37,50 @@ const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
-        getHikeData();
+        getHikeData(data);
     });
 }
 
-const getHikeData = () => {
+const getHikeData = (data) => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
-        // console.log(data);
-        displayHikeData(data);
+        // console.log(data.trails);
+        pushHikeData(data.trails);
         data.trails.forEach(trail => {
             weatherQuery.lat = trail.latitude;
             weatherQuery.lon = trail.longitude;
+            
             getWeatherData();
         })
     });
+}
+
+const getWeatherData = () => {
+    $.getJSON(Weather_URL, weatherQuery, (data) => {
+        // console.log(data.data);
+        pushWeatherData(data.data)
+        // displayWeatherData(data);
+    });
+}
+
+const pushHikeData = trail => {
+    // console.log(trail);
+    for (i = 0; i < trail.length; i++) {
+        info.push({
+            name: `${trail[i].name}`,
+            location: `${trail[i].location}`,
+            length: `${trail[i].length} mi`,
+            img: `${trail[i].imgSmallMed}`,
+            difficulty: `${trail[i].difficulty}`,
+            weather_today: {},
+            weather_tmrw: {},
+        });
+    }
+    console.log(info);
+}
+
+const pushWeatherData = item => {
+    console.log(item);
+    info[weather_today].push('hello');
 }
 
 const displayHikeData = data => {
@@ -71,12 +104,7 @@ const getItemsHtml = trails => (
     ))
 )
 
-const getWeatherData = () => {
-    $.getJSON(Weather_URL, weatherQuery, (data) => {
-        // console.log(data);
-        displayWeatherData(data);
-    });
-}
+
 
 const displayWeatherData = data => {
     console.log ('weather data is ', data);
