@@ -11,7 +11,7 @@ let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
-    maxResults: 3,
+    maxResults: 2,
 };
 
 let weatherQuery = {
@@ -113,30 +113,30 @@ const getItemsHtml = () => {
     for (i = 0; i < hikeQuery.maxResults; i++) {
         trailDiv += `
             <div class="row">
-                <div class="hike-result">
+                <div class="hike-result box col-3">
+                    <h2>${info[i].name}</h2>    
                     <img src="${info[i].img}" alt="picture of ${info[i].name}">
-                    <h2>${info[i].name}</h2>
-                    <h3>${info[i].length}</h3>
-                    <h3>${info[i].difficulty}</h3>
-                    <h3>${info[i].location}</h3>
+                    <h3>Length: ${info[i].length}</h3>
+                    <h3>Difficulty: ${info[i].difficulty}</h3>
+                    <h3>Location: ${info[i].location}</h3>
                 </div>
-                <div class="weather-result">
-                    <div class="forecast today">
-                        <h3>Today's weather at ${info[i].location}:</h3>
-                        <h4>High: ${today[i].high}</h4>
-                        <h4>Low: ${today[i].low}</h4>
-                        <h4>Probability of Precipitation: ${today[i].prob_of_precip}</h4>
-                        <h4>Wind Speed: ${today[i].wind_speed}</h4>
-                        <h4>Description: ${today[i].weather_description}</h4>
-                    </div>
-                    <div class="forecast tmrw">
-                        <h3>Tomorrow's weather at ${info[i].location}:</h3>
-                        <h4>High: ${tmrw[i].high}</h4>
-                        <h4>Low: ${tmrw[i].low}</h4>
-                        <h4>Probability of Precipitation: ${tmrw[i].prob_of_precip}</h4>
-                        <h4>Wind Speed: ${tmrw[i].wind_speed}</h4>
-                        <h4>Description: ${tmrw[i].weather_description}</h4>
-                    </div>
+                <div class="forecast today box col-3">
+                    <h3>Today's weather at ${info[i].name}:</h3>
+                    <img src="https://www.weatherbit.io/static/img/icons/${today[i].weather_icon}.png" alt="${today[i].weather_description}">
+                    <h4>${today[i].weather_description}</h4>
+                    <h4>High: ${today[i].high}C</h4>
+                    <h4>Low: ${today[i].low}C</h4>
+                    <h4>Chance of Rain: ${today[i].prob_of_precip}%</h4>
+                    <h4>Wind Speed: ${today[i].wind_speed}</h4>
+                </div>
+                <div class="forecast tmrw box col-3">
+                    <h3>Tomorrow's weather at ${info[i].name}:</h3>
+                    <img src="https://www.weatherbit.io/static/img/icons/${tmrw[i].weather_icon}.png" alt="${tmrw[i].weather_description}">
+                    <h4>${tmrw[i].weather_description}</h4>
+                    <h4>High: ${tmrw[i].high}C</h4>
+                    <h4>Low: ${tmrw[i].low}C</h4>
+                    <h4>Chance of Rain: ${tmrw[i].prob_of_precip}%</h4>
+                    <h4>Wind Speed: ${tmrw[i].wind_speed}</h4>   
                 </div>
             </div>`;
 
@@ -146,8 +146,10 @@ const getItemsHtml = () => {
 }
 
 const displayData = (trailDiv) => {
-    // console.log('data dot trails is ', data.trails);
     $('.results').html(trailDiv);
+    info = [];
+    today = [];
+    tmrw = [];
 }
 
 const initApp = () => {
