@@ -52,7 +52,8 @@ const getHikeData = (data) => {
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         })
-    });
+    })
+    .fail(showErr);
 }
 
 const getWeatherData = () => {
@@ -63,9 +64,9 @@ const getWeatherData = () => {
 }
 
 const showQueries = () => {
-    // console.log(info);
-    // console.log(weather_now);
-    // console.log(weather_tmrw);
+    console.log(info);
+    // console.log(today);
+    // console.log(tmrw);
 }
 
 const pushHikeData = trail => {
@@ -77,9 +78,36 @@ const pushHikeData = trail => {
             length: `${trail[i].length} mi`,
             img: `${trail[i].imgSmallMed}`,
             difficulty: `${trail[i].difficulty}`,
+            url: `${trail[i].url}`,
         });
     }
+    convertDifficulties();
     // console.log(info);
+}
+
+const convertDifficulties = () => {
+    for (i = 0; i < hikeQuery.maxResults; i++) {
+        if (info[i].difficulty === 'green') {
+            info[i].difficulty = 'Easy';
+        } else if (info[i].difficulty === 'greenBlue') {
+            info[i].difficulty = 'Easy-Moderate';
+        } else if (info[i].difficulty === 'blue') {
+            info[i].difficulty = 'Moderate';
+        } else if (info[i].difficulty === 'blueBlack') {
+            info[i].difficulty = 'Moderate-Difficult';
+        } else if (info[i].difficulty === 'black') {
+            info[i].difficulty = 'Difficult';
+        }
+    }
+}
+
+const convertTemps =() => {
+    for (i = 0; i < hikeQuery.maxResults; i++) {
+        let highCels = '';
+        highCels = today[i].high;
+        let highFar = ''
+        highFar = 1.8 * highCels + 32;
+    }
 }
 
 const pushWeatherData = item => {
@@ -93,7 +121,6 @@ const pushWeatherData = item => {
         weather_code: `${item[0].weather.code}`,
         weather_description: `${item[0].weather.description}`
     });
-    
     tmrw.push({
         high: `${item[1].max_temp}`,
         low: `${item[1].min_temp}`,
@@ -103,9 +130,10 @@ const pushWeatherData = item => {
         weather_code: `${item[1].weather.code}`,
         weather_description: `${item[1].weather.description}`
     })
-    
+    showQueries();
+    convertTemps();
     getItemsHtml();
-    // showQueries();
+    
 }
 
 const getItemsHtml = () => {
@@ -114,7 +142,7 @@ const getItemsHtml = () => {
         trailDiv += `
             <div class="row">
                 <div class="hike-result box col-3">
-                    <h2>${info[i].name}</h2>    
+                    <h2><a href="${info[i].url}" target="blank">${info[i].name}</a></h2>    
                     <img src="${info[i].img}" alt="picture of ${info[i].name}">
                     <h3>Length: ${info[i].length}</h3>
                     <h3>Difficulty: ${info[i].difficulty}</h3>
@@ -141,7 +169,7 @@ const getItemsHtml = () => {
             </div>`;
 
     }
-    console.log(trailDiv);
+    // console.log(trailDiv);
     displayData(trailDiv)
 }
 

@@ -2,21 +2,37 @@ body {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Yosemite_Valley_from_Wawona_Tunnel_view%2C_vista_point..JPG/1200px-Yosemite_Valley_from_Wawona_Tunnel_view%2C_vista_point..JPG");
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 h1 {
     font-family: Indie Flower;
 }
 
+h2, h3, h4, h5 {
+    font-family: PT Serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    font-size: 110%;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .box {
     border: 1pt solid black;
     background-color: rgb(204, 229, 255, 0.8);
+    height: 500px;
 }
 
 .hike-result img {
     width: 85%;
     height: 216px;
+    margin: auto;
 }
 
 .search {
@@ -48,6 +64,6 @@ button {
     height: 23px;
 }
 
-h2, h3, h4, h5 {
-    font-family: PT Serif;
+.box {
+    text-align: center;
 }
