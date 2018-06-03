@@ -52,8 +52,7 @@ const getHikeData = (data) => {
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         })
-    })
-    .fail(showErr);
+    });
 }
 
 const getWeatherData = () => {
@@ -174,7 +173,9 @@ const getItemsHtml = () => {
 }
 
 const displayData = (trailDiv) => {
-    $('.results').html(trailDiv);
+    $('.results')
+        .prop('hidden', false)
+        .html(trailDiv);
     info = [];
     today = [];
     tmrw = [];
