@@ -74,7 +74,12 @@ const pushHikeData = trail => {
             difficulty: `${trail[i].difficulty}`,
             url: `${trail[i].url}`,
         });
+        if (info[i].img === '') {
+            info[i].img = 'https://commons.wikimedia.org/wiki/File:No_image_available.svg'
+        }
+        
     }
+    console.log(info);
     convertDifficulties();
 }
 

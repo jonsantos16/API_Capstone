@@ -81,6 +81,10 @@ div {
 }
 
 /* Header */
+.instructions h1 {
+    font-size: 40px;
+}
+
 h1 {
     font-family: Indie Flower;
 }
@@ -99,6 +103,8 @@ h1 {
 
 header {
     font-size: 14px;
+    vertical-align: middle;
+    padding-top: 20px;
 }
 input {
     width: 200px;
