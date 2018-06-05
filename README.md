@@ -10,11 +10,8 @@ Home Page View
 ## User Cases
 This app is for tourists, hikers, and even people interesting in going on a hike, to plan a hiking trip at a location near you or near a travel destination. 
 
-### UI Flow
-![UI Flow handwritten draft]()
-
-### Wireframe _main
-![Wireframe _Main]()
+### UI Flow and Wireframe _main
+![Wireframe _Main](https://github.com/jonsantos16/hiking-app-api-capstone/blob/master/Pictures/IMG_9365.jpg)
 
 ## Working Prototype
 You can access a working prototype of the app here: https://jonsantos16.github.io/hiking-app-api-capstone
