@@ -6,24 +6,20 @@ let geoCode = {
     address: '',
     key: 'AIzaSyB7-qMo_U4ijeTIbNWJ8TS_C2akTo_Vfcs',
 };
-
 let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
     maxResults: 2,
 };
-
 let weatherQuery = {
     key: 'e3b4b76d027b48dfad9acd269e86e54b',
     lat: '',
     lon: ''
 };
-
 let info = [];
 let today = [];
 let tmrw = [];
-
 
 const search = () => {
     $('.js-search-form').on('submit', event => {
@@ -75,11 +71,10 @@ const pushHikeData = trail => {
             url: `${trail[i].url}`,
         });
         if (info[i].img === '') {
-            info[i].img = 'https://commons.wikimedia.org/wiki/File:No_image_available.svg'
+            info[i].img = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png';
         }
         
     }
-    console.log(info);
     convertDifficulties();
 }
 
@@ -123,7 +118,6 @@ const pushWeatherData = item => {
 
 const getItemsHtml = () => {
     let trailDiv = '';
-    console.log(today[0]);
     for (i = 0; i < hikeQuery.maxResults; i++) {
         trailDiv += `
             <div class="row">
@@ -167,10 +161,9 @@ const displayData = (trailDiv) => {
     tmrw = [];
 }
 
-const showErr = (err) => {
-    const errMsg = (
-        `<p>We couldn't find a hike near that location</p>`
-    );
+const showErr = () => {
+    const errMsg = 
+        `<p>Sorry, we couldn't find a hike near that location</p>`;
     $('.results')
         .prop('hidden', false)
         .html(errMsg);

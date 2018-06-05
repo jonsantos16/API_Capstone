@@ -153,11 +153,16 @@ a:hover {
 
 .results {
     padding-top: 20px;
+    padding-bottom: 30px;
 }
 
 .row {
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+.results p {
+    text-align: center;
 }
 
 /* Footer */
@@ -169,3 +174,4 @@ footer {
     background-color: rgb(159, 223, 159, 0.8);
     width: 100%;
 }
+
