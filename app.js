@@ -28,7 +28,11 @@ let tmrw = [];
 const search = () => {
     $('.js-search-form').on('submit', event => {
         event.preventDefault();
-        const queryTarget = $(event.target).find('.js-query')
+        $('.instructions').remove();
+        const queryTarget = $(event.target).find('.js-query');
+        if (queryTarget.val() === '') {
+            alert('Please enter a location')
+        }
         geoCode.address = queryTarget.val(); 
         queryTarget.val('');
         getGeoData();
@@ -40,36 +44,27 @@ const getGeoData = () => {
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
-    });
+    }).fail(showErr);
 }
 
 const getHikeData = (data) => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
-        // console.log(data.trails);
         pushHikeData(data.trails);
         data.trails.forEach(trail => {
             weatherQuery.lat = trail.latitude;
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         })
-    });
+    }).fail(showErr);
 }
 
 const getWeatherData = () => {
     $.getJSON(Weather_URL, weatherQuery, (data) => {
-        // console.log(data.data);
         pushWeatherData(data.data)
-    });
-}
-
-const showQueries = () => {
-    console.log(info);
-    // console.log(today);
-    // console.log(tmrw);
+    }).fail(showErr);
 }
 
 const pushHikeData = trail => {
-    // console.log(trail);
     for (i = 0; i < trail.length; i++) {
         info.push({
             name: `${trail[i].name}`,
@@ -81,7 +76,6 @@ const pushHikeData = trail => {
         });
     }
     convertDifficulties();
-    // console.log(info);
 }
 
 const convertDifficulties = () => {
@@ -100,17 +94,7 @@ const convertDifficulties = () => {
     }
 }
 
-const convertTemps =() => {
-    for (i = 0; i < hikeQuery.maxResults; i++) {
-        let highCels = '';
-        highCels = today[i].high;
-        let highFar = ''
-        highFar = 1.8 * highCels + 32;
-    }
-}
-
 const pushWeatherData = item => {
-    // console.log(item);
     today.push({
         high: `${item[0].max_temp}`,
         low: `${item[0].min_temp}`,
@@ -129,14 +113,12 @@ const pushWeatherData = item => {
         weather_code: `${item[1].weather.code}`,
         weather_description: `${item[1].weather.description}`
     })
-    showQueries();
-    convertTemps();
     getItemsHtml();
-    
 }
 
 const getItemsHtml = () => {
     let trailDiv = '';
+    console.log(today[0]);
     for (i = 0; i < hikeQuery.maxResults; i++) {
         trailDiv += `
             <div class="row">
@@ -168,7 +150,6 @@ const getItemsHtml = () => {
             </div>`;
 
     }
-    // console.log(trailDiv);
     displayData(trailDiv)
 }
 
@@ -181,8 +162,13 @@ const displayData = (trailDiv) => {
     tmrw = [];
 }
 
-const initApp = () => {
-    search();
+const showErr = (err) => {
+    const errMsg = (
+        `<p>We couldn't find a hike near that location</p>`
+    );
+    $('.results')
+        .prop('hidden', false)
+        .html(errMsg);
 }
 
-$(initApp);
+$(search);

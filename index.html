@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Take a Hike!</title>
-    <script
-          src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous">
-    </script>
+    <title>Hike Finder</title>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="grid.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <header>
+        <div class="row">        
+            <div class="col-1 instructions">
+                <h1>Hike Finder</h1>
+                <p>Enter a location (city, address, vacation spot, etc.) to find hikes in the surrounding area with predicted weather conditions!</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-1 search">
                 <h1>Find hikes near...</h1>
@@ -28,11 +29,23 @@
             </div>
         </div>
     </header>
-    <main role="main" aria-lie="assertive" hidden>
-        <div class="results">
+    <main role="main" class ="results" aria-live="assertive" hidden>
+        <div>
             
         </div>
     </main>
-    <script src="index.js"></script>
+    <footer>
+        <p>(c) Jonathan Santos</p>
+        <ul>
+            <li><a href="https://github.com/jonsantos16" target="blank">GitHub</a></li>
+            <li><a href="mailto:santosjn94@gmail.com" target="_top">Email</a></li>
+        </ul>
+    </footer>
+    <script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous">
+    </script>
+    <script src="app.js"></script>
 </body>
 </html>
