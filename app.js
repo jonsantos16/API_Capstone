@@ -37,6 +37,10 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
+        // console.log(data.results.length);
+        if (data.results.length === 0) {
+            showErr();
+        }
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
@@ -70,6 +74,7 @@ const pushHikeData = trail => {
             difficulty: `${trail[i].difficulty}`,
             url: `${trail[i].url}`,
         });
+        
         if (info[i].img === '') {
             info[i].img = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png';
         }
@@ -113,13 +118,15 @@ const pushWeatherData = item => {
         weather_code: `${item[1].weather.code}`,
         weather_description: `${item[1].weather.description}`
     })
-    getItemsHtml();
+    if (today.length === hikeQuery.maxResults) {
+        getItemsHtml();
+    }
 }
 
 const getItemsHtml = () => {
     let trailDiv = '';
     for (i = 0; i < hikeQuery.maxResults; i++) {
-        trailDiv += `
+            trailDiv += `
             <div class="row">
                 <div class="hike-result box col-3">
                     <h2><a href="${info[i].url}" target="blank">${info[i].name}</a></h2>    
@@ -147,7 +154,6 @@ const getItemsHtml = () => {
                     <h4>Wind Speed: ${tmrw[i].wind_speed}</h4>   
                 </div>
             </div>`;
-
     }
     displayData(trailDiv)
 }
