@@ -5,8 +5,8 @@ The Hike Finder app is designed to provide you with different options of hiking 
 
 Home Page View
 :-------------------------:|:-------------------------:
-![Home Page](https://github.com/jonsantos16/hiking-app-api-capstone/blob/master/Pictures/Screen%20Shot%202018-06-05%20at%201.20.58%20PM.png)  |  
-![Search Results Page](https://github.com/jonsantos16/hiking-app-api-capstone/blob/master/Pictures/Screen%20Shot%202018-06-05%20at%201.22.02%20PM.png) |
+![Home Page](https://github.com/jonsantos16/hiking-app-api-capstone/blob/master/Pictures/Screen%20Shot%202018-06-06%20at%202.48.42%20PM.png)  |  
+![Search Results Page](https://github.com/jonsantos16/hiking-app-api-capstone/blob/master/Pictures/Screen%20Shot%202018-06-06%20at%202.49.06%20PM.png) |
 
 ## User Cases
 This app is for tourists, hikers, and even people interesting in going on a hike, to plan a hiking trip at a location near you or near a travel destination. 
