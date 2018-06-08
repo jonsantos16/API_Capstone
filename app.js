@@ -37,14 +37,13 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
-        // console.log(data.results.length);
         if (data.results.length === 0) {
             showErr();
         }
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
-    }).fail(showErr);
+    })
 }
 
 const getHikeData = (data) => {
@@ -58,13 +57,13 @@ const getHikeData = (data) => {
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         })
-    }).fail(showErr);
+    })
 }
 
 const getWeatherData = () => {
     $.getJSON(Weather_URL, weatherQuery, (data) => {
         pushWeatherData(data.data)
-    }).fail(showErr);
+    })
 }
 
 const pushHikeData = trail => {
@@ -171,7 +170,7 @@ const displayData = (trailDiv) => {
 
 const showErr = () => {
     const errMsg = 
-        `<p>Sorry, we couldn't find a hike near that location</p>`;
+        `<p>Sorry, we couldn't find a hike near that location. Please try another.</p>`;
     $('.results')
         .prop('hidden', false)
         .html(errMsg);
