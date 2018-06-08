@@ -49,6 +49,9 @@ const getGeoData = () => {
 
 const getHikeData = (data) => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
+        if (data.trails.length === 0) {
+            showErr();
+        }
         pushHikeData(data.trails);
         data.trails.forEach(trail => {
             weatherQuery.lat = trail.latitude;
@@ -74,7 +77,6 @@ const pushHikeData = trail => {
             difficulty: `${trail[i].difficulty}`,
             url: `${trail[i].url}`,
         });
-        
         if (info[i].img === '') {
             info[i].img = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png';
         }
