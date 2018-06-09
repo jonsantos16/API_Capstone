@@ -10,7 +10,7 @@ let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
-    maxResults: 2,
+    maxResults: 10,
 };
 let weatherQuery = {
     key: 'e3b4b76d027b48dfad9acd269e86e54b',
@@ -43,7 +43,7 @@ const getGeoData = () => {
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
-    })
+    }).fail(showErr())
 }
 
 const getHikeData = (data) => {
@@ -57,13 +57,13 @@ const getHikeData = (data) => {
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         })
-    })
+    }).fail(showErr())
 }
 
 const getWeatherData = () => {
     $.getJSON(Weather_URL, weatherQuery, (data) => {
         pushWeatherData(data.data)
-    })
+    }).fail(showErr())
 }
 
 const pushHikeData = trail => {
@@ -77,7 +77,7 @@ const pushHikeData = trail => {
             url: `${trail[i].url}`,
         });
         if (info[i].img === '') {
-            info[i].img = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1024px-No_image_3x4.svg.png';
+            info[i].img = 'pictures/no-pic-available.png';
         }
         
     }
