@@ -43,7 +43,7 @@ const getGeoData = () => {
         if (data.results.length === 0) {
             showErr();
         }
-    }).fail(showErr());
+    })
 }
 
 const getHikeData = (data) => {
@@ -77,7 +77,7 @@ const pushHikeData = trail => {
             url: `${trail[i].url}`,
         });
         if (info[i].img === '') {
-            info[i].img = 'pictures/no-pic-available.png';
+            info[i].img = 'pictures/nophoto.gif';
         }
         
     }
