@@ -10,7 +10,7 @@ let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
-    maxResults: 10,
+    maxResults: 2,
 };
 let weatherQuery = {
     key: 'e3b4b76d027b48dfad9acd269e86e54b',
@@ -37,33 +37,33 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
-        if (data.results.length === 0) {
-            showErr();
-        }
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
-    }).fail(showErr())
+        if (data.results.length === 0) {
+            showErr();
+        }
+    }).fail(showErr());
 }
 
 const getHikeData = (data) => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
-        if (data.trails.length === 0) {
-            showErr();
-        }
         pushHikeData(data.trails);
         data.trails.forEach(trail => {
             weatherQuery.lat = trail.latitude;
             weatherQuery.lon = trail.longitude;
             getWeatherData();
-        })
-    }).fail(showErr())
+        });
+        if (data.trails.length === 0) {
+            showErr();
+        }
+    })
 }
 
 const getWeatherData = () => {
     $.getJSON(Weather_URL, weatherQuery, (data) => {
         pushWeatherData(data.data)
-    }).fail(showErr())
+    })
 }
 
 const pushHikeData = trail => {
