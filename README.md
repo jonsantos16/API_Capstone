@@ -5,7 +5,7 @@ The Hike Finder app is designed to provide you with different options of hiking 
 
 Home Page View
 ![Home Page](pictures/newhome1.png) 
-![Search Results Page](pictures/screenshot2.png)
+![Search Results Page](pictures/newresults1.png)
 
 ## User Cases
 This app is for tourists, hikers, and even people interesting in going on a hike, to plan a hiking trip at a location near you or near a travel destination. 
