@@ -43,7 +43,7 @@ const getGeoData = () => {
         if (data.results.length === 0) {
             showErr();
         }
-    })
+    }).fail(showErr());
 }
 
 const getHikeData = (data) => {
