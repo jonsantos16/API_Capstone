@@ -4,7 +4,7 @@ The Hike Finder app is designed to provide you with different options of hiking 
 ## Screenshots
 
 Home Page View
-![Home Page](pictures/screenshot1.png) 
+![Home Page](pictures/newhome1.png) 
 ![Search Results Page](pictures/screenshot2.png)
 
 ## User Cases
