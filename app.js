@@ -10,7 +10,7 @@ let hikeQuery = {
     key: '200265082-fbc1bc2d3aae4542c7fdc5335e6d16b9',
     lat: '',
     lon: '',
-    maxResults: 2,
+    maxResults: 10,
 };
 let weatherQuery = {
     key: 'e3b4b76d027b48dfad9acd269e86e54b',

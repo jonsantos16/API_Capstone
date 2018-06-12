@@ -140,7 +140,7 @@ a:hover {
 .box {
     border: 1pt solid black;
     background-color: rgb(204, 229, 255, 0.8);
-    height: 370px;
+    height: 400px;
     overflow-y: auto;
     padding-top: 20px;
     padding-bottom: 20px;
