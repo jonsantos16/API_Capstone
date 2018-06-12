@@ -37,26 +37,31 @@ const search = () => {
 
 const getGeoData = () => {
     $.getJSON(Map_URL, geoCode, (data) => {
-        hikeQuery.lat = data.results[0].geometry.location.lat;
-        hikeQuery.lon = data.results[0].geometry.location.lng;
-        getHikeData(data);
-        // if (data.results.length === 0) {
-        //     showErr();
-        // }
-    }).fail(showErr());
+        console.log(data);
+        if (data.results.length === 0) {
+            showErr();
+        } else {
+            hikeQuery.lat = data.results[0].geometry.location.lat;
+            hikeQuery.lon = data.results[0].geometry.location.lng;
+            getHikeData(data);
+        }
+        
+    })
 }
 
 const getHikeData = (data) => {
     $.getJSON(Hike_URL, hikeQuery, (data) => {
-        pushHikeData(data.trails);
-        data.trails.forEach(trail => {
-            weatherQuery.lat = trail.latitude;
-            weatherQuery.lon = trail.longitude;
-            getWeatherData();
-        });
-        // if (data.trails.length === 0) {
-        //     showErr();
-        // }
+        console.log(data);
+        if (data.trails.length === 0) {
+            showErr();
+        } else {
+            pushHikeData(data.trails);
+            data.trails.forEach(trail => {
+                weatherQuery.lat = trail.latitude;
+                weatherQuery.lon = trail.longitude;
+                getWeatherData();
+        })
+        }
     })
 }
 
