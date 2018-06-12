@@ -40,9 +40,9 @@ const getGeoData = () => {
         hikeQuery.lat = data.results[0].geometry.location.lat;
         hikeQuery.lon = data.results[0].geometry.location.lng;
         getHikeData(data);
-        if (data.results.length === 0) {
-            showErr();
-        }
+        // if (data.results.length === 0) {
+        //     showErr();
+        // }
     }).fail(showErr());
 }
 
@@ -54,9 +54,9 @@ const getHikeData = (data) => {
             weatherQuery.lon = trail.longitude;
             getWeatherData();
         });
-        if (data.trails.length === 0) {
-            showErr();
-        }
+        // if (data.trails.length === 0) {
+        //     showErr();
+        // }
     })
 }
 
